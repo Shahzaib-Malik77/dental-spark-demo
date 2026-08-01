@@ -133,6 +133,13 @@
 }
 
 @layer base {
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   * {
     border-color: var(--color-border);
   }
@@ -140,5 +147,9 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: "Open Sauce One", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
+
