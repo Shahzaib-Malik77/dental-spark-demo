@@ -1,5 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  MarqueeStrip,
+  WhyUsSection,
+  TeamSection,
+  TestimonialsSection,
+  FaqSection,
+  BookingSection,
+  SiteFooter,
+} from "@/components/dental/Sections";
+
+import {
   useEffect,
   useLayoutEffect,
   useRef,
