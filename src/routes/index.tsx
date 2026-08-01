@@ -1,5 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  MarqueeStrip,
+  WhyUsSection,
+  TeamSection,
+  TestimonialsSection,
+  FaqSection,
+  BookingSection,
+  SiteFooter,
+} from "@/components/dental/Sections";
+
+import {
   useEffect,
   useLayoutEffect,
   useRef,
@@ -221,9 +231,39 @@ function Splash({ onComplete }: { onComplete: () => void }) {
   );
 }
 
+const navLinks = [
+  { label: "Home", href: "#top" },
+  { label: "Services", href: "#services" },
+  { label: "About", href: "#about" },
+  { label: "Team", href: "#team" },
+  { label: "Contact", href: "#contact" },
+];
+
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div className="fixed top-0 left-0 z-[60] h-0.5 w-full bg-transparent">
+      <div
+        className="h-full bg-black transition-[width] duration-150 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const links = ["Home", "Services", "About", "Gallery", "Contact"];
+  const links = navLinks;
+
 
   useEffect(() => {
     if (open) document.body.style.overflow = "hidden";
@@ -249,11 +289,28 @@ function Navbar() {
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
-          <button className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-black hover:text-white">
-            Menu
-          </button>
-          <span className="text-sm font-semibold text-black">Dental Emergency</span>
+          <nav className="flex items-center gap-6">
+            {navLinks.slice(1, 4).map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="story-link text-sm font-semibold text-black"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <a
+            href="#contact"
+            className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-black hover:text-white"
+          >
+            Book Appointment
+          </a>
+          <a href="tel:+15551234567" className="text-sm font-semibold text-black">
+            Dental Emergency
+          </a>
         </div>
+
 
         <button
           aria-label="Toggle menu"
@@ -295,17 +352,18 @@ function Navbar() {
           <div className="flex h-full flex-col justify-center gap-1 px-8">
             {links.map((link, i) => (
               <a
-                key={link}
-                href="#"
+                key={link.label}
+                href={link.href}
                 onClick={() => setOpen(false)}
                 className={`text-4xl font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:text-neutral-500 ${
                   open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
                 }`}
                 style={{ transitionDelay: open ? `${100 + i * 60}ms` : "0ms" }}
               >
-                {link}
+                {link.label}
               </a>
             ))}
+
             <div
               className={`mt-8 border-t border-neutral-200 pt-8 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
                 open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
@@ -378,7 +436,9 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div id="top" className="min-h-screen w-full bg-white">
+      <ScrollProgress />
+
       {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
       <Navbar />
 
@@ -440,7 +500,9 @@ function Index() {
 
       {/* SECTION 2 — SMILE GALLERY */}
       <section
+        id="services"
         ref={setS2Ref}
+
         className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pt-1.5 pb-1.5 md:h-screen md:gap-2 md:px-5 md:pt-2 md:pb-2"
       >
         <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-1.5 md:grid-cols-2 md:grid-rows-[1fr_1fr_0.8fr] md:gap-2">
@@ -549,6 +611,8 @@ function Index() {
         ref={(el) => {
           s3Reveal.containerRef.current = el;
         }}
+        id="implants"
+
         className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pt-1.5 pb-1.5 md:h-screen md:gap-2 md:px-5 md:pt-2 md:pb-2"
       >
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-1.5 md:grid-cols-2 md:gap-2">
@@ -644,6 +708,15 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <MarqueeStrip />
+      <WhyUsSection />
+      <TeamSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <BookingSection />
+      <SiteFooter />
     </div>
+
   );
 }
