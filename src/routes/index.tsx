@@ -698,6 +698,15 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <MarqueeStrip />
+      <WhyUsSection />
+      <TeamSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <BookingSection />
+      <SiteFooter />
     </div>
+
   );
 }
