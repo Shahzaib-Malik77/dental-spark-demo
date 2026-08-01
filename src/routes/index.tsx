@@ -132,7 +132,7 @@ function MaskedCard({
   style,
 }: {
   bgImage: string;
-  position?: MaskPosition;
+  position?: MaskPosition | undefined;
   imageWidth: number;
   focalX: number;
   className?: string;
