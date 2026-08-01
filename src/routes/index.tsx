@@ -325,17 +325,18 @@ function Navbar() {
           <div className="flex h-full flex-col justify-center gap-1 px-8">
             {links.map((link, i) => (
               <a
-                key={link}
-                href="#"
+                key={link.label}
+                href={link.href}
                 onClick={() => setOpen(false)}
                 className={`text-4xl font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:text-neutral-500 ${
                   open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
                 }`}
                 style={{ transitionDelay: open ? `${100 + i * 60}ms` : "0ms" }}
               >
-                {link}
+                {link.label}
               </a>
             ))}
+
             <div
               className={`mt-8 border-t border-neutral-200 pt-8 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
                 open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
