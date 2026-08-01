@@ -426,7 +426,9 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div id="top" className="min-h-screen w-full bg-white">
+      <ScrollProgress />
+
       {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
       <Navbar />
 
@@ -488,7 +490,9 @@ function Index() {
 
       {/* SECTION 2 — SMILE GALLERY */}
       <section
+        id="services"
         ref={setS2Ref}
+
         className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pt-1.5 pb-1.5 md:h-screen md:gap-2 md:px-5 md:pt-2 md:pb-2"
       >
         <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-1.5 md:grid-cols-2 md:grid-rows-[1fr_1fr_0.8fr] md:gap-2">
@@ -597,6 +601,8 @@ function Index() {
         ref={(el) => {
           s3Reveal.containerRef.current = el;
         }}
+        id="implants"
+
         className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pt-1.5 pb-1.5 md:h-screen md:gap-2 md:px-5 md:pt-2 md:pb-2"
       >
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-1.5 md:grid-cols-2 md:gap-2">
