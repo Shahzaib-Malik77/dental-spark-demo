@@ -279,11 +279,28 @@ function Navbar() {
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
-          <button className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-black hover:text-white">
-            Menu
-          </button>
-          <span className="text-sm font-semibold text-black">Dental Emergency</span>
+          <nav className="flex items-center gap-6">
+            {navLinks.slice(1, 4).map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="story-link text-sm font-semibold text-black"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <a
+            href="#contact"
+            className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-black hover:text-white"
+          >
+            Book Appointment
+          </a>
+          <a href="tel:+15551234567" className="text-sm font-semibold text-black">
+            Dental Emergency
+          </a>
         </div>
+
 
         <button
           aria-label="Toggle menu"
